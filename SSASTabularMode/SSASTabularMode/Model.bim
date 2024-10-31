@@ -1,0 +1,696 @@
+{
+  "name": "SemanticModel",
+  "compatibilityLevel": 1600,
+  "model": {
+    "culture": "en-US",
+    "dataSources": [
+      {
+        "type": "structured",
+        "name": "SQL/localhost;AdventureWorksDW2019",
+        "connectionDetails": {
+          "protocol": "tds",
+          "address": {
+            "server": "localhost",
+            "database": "AdventureWorksDW2019"
+          },
+          "authentication": null,
+          "query": null
+        },
+        "credential": {
+          "AuthenticationKind": "Windows",
+          "kind": "SQL",
+          "path": "localhost;AdventureWorksDW2019",
+          "Username": "NORMIN\\Normin",
+          "EncryptConnection": false
+        }
+      },
+      {
+        "type": "structured",
+        "name": "File/C:\\Users\\Normin\\Downloads\\Dim Cars table xlsx",
+        "connectionDetails": {
+          "protocol": "file",
+          "address": {
+            "path": "C:\\Users\\Normin\\Downloads\\Dim Cars table.xlsx"
+          },
+          "authentication": null,
+          "query": null
+        },
+        "credential": {
+          "AuthenticationKind": "Windows",
+          "kind": "File",
+          "path": "c:\\users\\normin\\downloads\\dim cars table.xlsx",
+          "Username": "NORMIN\\Normin"
+        },
+        "contextExpression": [
+          "let",
+          "    #\"0001\" = Excel.Workbook(..., null, true)",
+          "in",
+          "    #\"0001\""
+        ]
+      }
+    ],
+    "tables": [
+      {
+        "name": "Customer",
+        "columns": [
+          {
+            "name": "Customer Key",
+            "dataType": "int64",
+            "sourceColumn": "Customer Key"
+          },
+          {
+            "name": "Geography Key",
+            "dataType": "int64",
+            "sourceColumn": "Geography Key"
+          },
+          {
+            "name": "Customer Name",
+            "dataType": "string",
+            "sourceColumn": "Customer Name"
+          },
+          {
+            "name": "Date of Birth",
+            "dataType": "dateTime",
+            "sourceColumn": "Date of Birth"
+          },
+          {
+            "name": "Marital Status",
+            "dataType": "string",
+            "sourceColumn": "Marital Status"
+          },
+          {
+            "name": "Gender",
+            "dataType": "string",
+            "sourceColumn": "Gender"
+          },
+          {
+            "name": "Email Address",
+            "dataType": "string",
+            "sourceColumn": "Email Address"
+          },
+          {
+            "name": "Income",
+            "dataType": "decimal",
+            "sourceColumn": "Income"
+          },
+          {
+            "name": "Education",
+            "dataType": "string",
+            "sourceColumn": "Education"
+          },
+          {
+            "name": "Occupation",
+            "dataType": "string",
+            "sourceColumn": "Occupation"
+          },
+          {
+            "name": "Date of First Purchase",
+            "dataType": "dateTime",
+            "sourceColumn": "Date of First Purchase"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/localhost;AdventureWorksDW2019\",",
+                "    SSAS_vwCustomer = Source{[Schema=\"SSAS\",Item=\"vwCustomer\"]}[Data]",
+                "in",
+                "    SSAS_vwCustomer"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Date",
+        "dataCategory": "Time",
+        "columns": [
+          {
+            "name": "Date Key",
+            "dataType": "int64",
+            "sourceColumn": "Date Key"
+          },
+          {
+            "name": "Date",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "isKey": true,
+            "sourceColumn": "Date"
+          },
+          {
+            "name": "Day Number of Week",
+            "dataType": "int64",
+            "sourceColumn": "Day Number of Week"
+          },
+          {
+            "name": "Day",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "Day"
+          },
+          {
+            "name": "Day Number of Month",
+            "dataType": "int64",
+            "sourceColumn": "Day Number of Month"
+          },
+          {
+            "name": "Day Number of Year",
+            "dataType": "int64",
+            "sourceColumn": "Day Number of Year"
+          },
+          {
+            "name": "Week Number of Year",
+            "dataType": "int64",
+            "sourceColumn": "Week Number of Year"
+          },
+          {
+            "name": "Month",
+            "dataType": "string",
+            "sourceColumn": "Month",
+            "sortByColumn": "Month Number of Year"
+          },
+          {
+            "name": "Month Number of Year",
+            "dataType": "int64",
+            "sourceColumn": "Month Number of Year"
+          },
+          {
+            "name": "Calendar Quarter",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "Calendar Quarter"
+          },
+          {
+            "name": "Calendar Year",
+            "dataType": "int64",
+            "sourceColumn": "Calendar Year"
+          },
+          {
+            "name": "Calendar Semester",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "Calendar Semester"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/localhost;AdventureWorksDW2019\",",
+                "    SSAS_vwDate = Source{[Schema=\"SSAS\",Item=\"vwDate\"]}[Data]",
+                "in",
+                "    SSAS_vwDate"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Geography",
+        "columns": [
+          {
+            "name": "Geography Key",
+            "dataType": "int64",
+            "sourceColumn": "Geography Key"
+          },
+          {
+            "name": "City",
+            "dataType": "string",
+            "sourceColumn": "City"
+          },
+          {
+            "name": "State Province Code",
+            "dataType": "string",
+            "sourceColumn": "State Province Code"
+          },
+          {
+            "name": "State Province Name",
+            "dataType": "string",
+            "sourceColumn": "State Province Name"
+          },
+          {
+            "name": "English Country Region Name",
+            "dataType": "string",
+            "sourceColumn": "English Country Region Name"
+          },
+          {
+            "name": "Postal Code",
+            "dataType": "string",
+            "sourceColumn": "Postal Code"
+          },
+          {
+            "name": "Sales Territory Key",
+            "dataType": "int64",
+            "sourceColumn": "Sales Territory Key"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/localhost;AdventureWorksDW2019\",",
+                "    SSAS_vwGeography = Source{[Schema=\"SSAS\",Item=\"vwGeography\"]}[Data]",
+                "in",
+                "    SSAS_vwGeography"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "InternetSales",
+        "columns": [
+          {
+            "name": "Product Key",
+            "dataType": "int64",
+            "sourceColumn": "Product Key"
+          },
+          {
+            "name": "Order Date Key",
+            "dataType": "int64",
+            "sourceColumn": "Order Date Key"
+          },
+          {
+            "name": "Due Date Key",
+            "dataType": "int64",
+            "sourceColumn": "Due Date Key"
+          },
+          {
+            "name": "Ship Date Key",
+            "dataType": "int64",
+            "sourceColumn": "Ship Date Key"
+          },
+          {
+            "name": "Customer Key",
+            "dataType": "int64",
+            "sourceColumn": "Customer Key"
+          },
+          {
+            "name": "Promotion Key",
+            "dataType": "int64",
+            "sourceColumn": "Promotion Key"
+          },
+          {
+            "name": "Currency Key",
+            "dataType": "int64",
+            "sourceColumn": "Currency Key"
+          },
+          {
+            "name": "Sales Territory Key",
+            "dataType": "int64",
+            "sourceColumn": "Sales Territory Key"
+          },
+          {
+            "name": "Calendar Quarter",
+            "dataType": "string",
+            "sourceColumn": "Calendar Quarter"
+          },
+          {
+            "name": "Sales Order Line Number",
+            "dataType": "int64",
+            "sourceColumn": "Sales Order Line Number"
+          },
+          {
+            "name": "Order Date",
+            "dataType": "dateTime",
+            "sourceColumn": "Order Date"
+          },
+          {
+            "name": "Due Date",
+            "dataType": "dateTime",
+            "sourceColumn": "Due Date"
+          },
+          {
+            "name": "Ship Date",
+            "dataType": "dateTime",
+            "sourceColumn": "Ship Date"
+          },
+          {
+            "name": "Order Quantity",
+            "dataType": "int64",
+            "sourceColumn": "Order Quantity"
+          },
+          {
+            "name": "Unit Price",
+            "dataType": "decimal",
+            "sourceColumn": "Unit Price"
+          },
+          {
+            "name": "Total Product Cost",
+            "dataType": "decimal",
+            "sourceColumn": "Total Product Cost"
+          },
+          {
+            "name": "SalesAmount",
+            "dataType": "decimal",
+            "sourceColumn": "SalesAmount"
+          },
+          {
+            "name": "Tax Amount",
+            "dataType": "decimal",
+            "sourceColumn": "Tax Amount"
+          },
+          {
+            "name": "Freight",
+            "dataType": "decimal",
+            "sourceColumn": "Freight"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/localhost;AdventureWorksDW2019\",",
+                "    SSAS_vwInternetSales = Source{[Schema=\"SSAS\",Item=\"vwInternetSales\"]}[Data]",
+                "in",
+                "    SSAS_vwInternetSales"
+              ]
+            }
+          }
+        ],
+        "measures": [
+          {
+            "name": "Suma de Order Quantity",
+            "expression": "SUM([Order Quantity])"
+          },
+          {
+            "name": "Cantidad de Ordenes",
+            "expression": "CALCULATE([Suma de Order Quantity],DATESYTD('Date'[Date]))"
+          },
+          {
+            "name": "Order Quantity by Due Date",
+            "expression": " CALCULATE(SUM('InternetSales'[Order Quantity]),USERELATIONSHIP('Date'[Date Key],InternetSales[Due Date Key]))"
+          },
+          {
+            "name": "Order Quantity by Ship Date",
+            "expression": " CALCULATE(SUM('InternetSales'[Order Quantity]),USERELATIONSHIP('Date'[Date Key],InternetSales[Ship Date Key]))"
+          }
+        ]
+      },
+      {
+        "name": "SalesTerritory",
+        "columns": [
+          {
+            "name": "Sales Territory Key",
+            "dataType": "int64",
+            "sourceColumn": "Sales Territory Key"
+          },
+          {
+            "name": "Sales Territory Region",
+            "dataType": "string",
+            "sourceColumn": "Sales Territory Region"
+          },
+          {
+            "name": "Sales Territory Country",
+            "dataType": "string",
+            "sourceColumn": "Sales Territory Country"
+          },
+          {
+            "name": "Sales Territory Group",
+            "dataType": "string",
+            "sourceColumn": "Sales Territory Group"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/localhost;AdventureWorksDW2019\",",
+                "    SSAS_vwSalesTerritory = Source{[Schema=\"SSAS\",Item=\"vwSalesTerritory\"]}[Data]",
+                "in",
+                "    SSAS_vwSalesTerritory"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Employee",
+        "columns": [
+          {
+            "name": "EmployeeKey",
+            "dataType": "int64",
+            "sourceColumn": "EmployeeKey"
+          },
+          {
+            "name": "ParentEmployeeKey",
+            "dataType": "int64",
+            "sourceColumn": "ParentEmployeeKey"
+          },
+          {
+            "name": "EmployeeNationalIDAlternateKey",
+            "dataType": "string",
+            "sourceColumn": "EmployeeNationalIDAlternateKey"
+          },
+          {
+            "name": "ParentEmployeeNationalIDAlternateKey",
+            "dataType": "string",
+            "sourceColumn": "ParentEmployeeNationalIDAlternateKey"
+          },
+          {
+            "name": "SalesTerritoryKey",
+            "dataType": "int64",
+            "sourceColumn": "SalesTerritoryKey"
+          },
+          {
+            "name": "FirstName",
+            "dataType": "string",
+            "sourceColumn": "FirstName"
+          },
+          {
+            "name": "LastName",
+            "dataType": "string",
+            "sourceColumn": "LastName"
+          },
+          {
+            "name": "MiddleName",
+            "dataType": "string",
+            "sourceColumn": "MiddleName"
+          },
+          {
+            "name": "NameStyle",
+            "dataType": "boolean",
+            "sourceColumn": "NameStyle"
+          },
+          {
+            "name": "Title",
+            "dataType": "string",
+            "sourceColumn": "Title"
+          },
+          {
+            "name": "HireDate",
+            "dataType": "dateTime",
+            "sourceColumn": "HireDate"
+          },
+          {
+            "name": "BirthDate",
+            "dataType": "dateTime",
+            "sourceColumn": "BirthDate"
+          },
+          {
+            "name": "LoginID",
+            "dataType": "string",
+            "sourceColumn": "LoginID"
+          },
+          {
+            "name": "EmailAddress",
+            "dataType": "string",
+            "sourceColumn": "EmailAddress"
+          },
+          {
+            "name": "Phone",
+            "dataType": "string",
+            "sourceColumn": "Phone"
+          },
+          {
+            "name": "MaritalStatus",
+            "dataType": "string",
+            "sourceColumn": "MaritalStatus"
+          },
+          {
+            "name": "EmergencyContactName",
+            "dataType": "string",
+            "sourceColumn": "EmergencyContactName"
+          },
+          {
+            "name": "EmergencyContactPhone",
+            "dataType": "string",
+            "sourceColumn": "EmergencyContactPhone"
+          },
+          {
+            "name": "SalariedFlag",
+            "dataType": "boolean",
+            "sourceColumn": "SalariedFlag"
+          },
+          {
+            "name": "Gender",
+            "dataType": "string",
+            "sourceColumn": "Gender"
+          },
+          {
+            "name": "PayFrequency",
+            "dataType": "int64",
+            "sourceColumn": "PayFrequency"
+          },
+          {
+            "name": "BaseRate",
+            "dataType": "decimal",
+            "sourceColumn": "BaseRate"
+          },
+          {
+            "name": "VacationHours",
+            "dataType": "int64",
+            "sourceColumn": "VacationHours"
+          },
+          {
+            "name": "SickLeaveHours",
+            "dataType": "int64",
+            "sourceColumn": "SickLeaveHours"
+          },
+          {
+            "name": "CurrentFlag",
+            "dataType": "boolean",
+            "sourceColumn": "CurrentFlag"
+          },
+          {
+            "name": "SalesPersonFlag",
+            "dataType": "boolean",
+            "sourceColumn": "SalesPersonFlag"
+          },
+          {
+            "name": "DepartmentName",
+            "dataType": "string",
+            "sourceColumn": "DepartmentName"
+          },
+          {
+            "name": "StartDate",
+            "dataType": "dateTime",
+            "sourceColumn": "StartDate"
+          },
+          {
+            "name": "EndDate",
+            "dataType": "dateTime",
+            "sourceColumn": "EndDate"
+          },
+          {
+            "name": "Status",
+            "dataType": "string",
+            "sourceColumn": "Status"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/localhost;AdventureWorksDW2019\",",
+                "    dbo_Employee = Source{[Schema=\"dbo\",Item=\"Employee\"]}[Data]",
+                "in",
+                "    dbo_Employee"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "relationships": [
+      {
+        "name": "a41dadd0-8fdb-4440-8a3d-7033b0b995cc",
+        "fromTable": "Geography",
+        "fromColumn": "Sales Territory Key",
+        "toTable": "SalesTerritory",
+        "toColumn": "Sales Territory Key"
+      },
+      {
+        "name": "3a8e2b31-d3e0-43a6-9058-da672fef3234",
+        "fromTable": "Customer",
+        "fromColumn": "Customer Key",
+        "toTable": "Geography",
+        "toColumn": "Geography Key"
+      },
+      {
+        "name": "9a845cdb-d7f8-43ba-be86-d1c522ee3fb9",
+        "fromTable": "InternetSales",
+        "fromColumn": "Product Key",
+        "toTable": "Customer",
+        "toColumn": "Customer Key"
+      },
+      {
+        "name": "42467a28-4914-421e-b390-754d3ae2f518",
+        "fromTable": "InternetSales",
+        "fromColumn": "Order Date Key",
+        "toTable": "Date",
+        "toColumn": "Date Key"
+      },
+      {
+        "name": "72422ae2-f3ed-4480-83ba-66110a97a890",
+        "fromTable": "Employee",
+        "fromColumn": "EmployeeKey",
+        "toTable": "SalesTerritory",
+        "toColumn": "Sales Territory Key"
+      },
+      {
+        "name": "26b86c9c-b6f4-4e9b-b109-6482e6272859",
+        "fromTable": "InternetSales",
+        "fromColumn": "Due Date Key",
+        "toTable": "Date",
+        "toColumn": "Date Key",
+        "isActive": false
+      },
+      {
+        "name": "623d2b30-8482-472b-aa2c-552dbb90a126",
+        "fromTable": "InternetSales",
+        "fromColumn": "Ship Date Key",
+        "toTable": "Date",
+        "toColumn": "Date Key",
+        "isActive": false
+      }
+    ],
+    "expressions": [
+      {
+        "name": "Cars",
+        "kind": "m",
+        "expression": [
+          "let",
+          "    Origen = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText(\"lZhPTxxHEMW/ymrlow9dr/8fk0t8iRQ5kX1APiBY2QhkJMgqcj59llnYrh6/N1I4gKjuqWqmf7yteldXe9u/33883J6+73a7T48P98//XH89fN9/eX+1xyn668PxcPrxy/H2bonFy/4/j/8e7+92uyWclq3XN/fnRC9fvx+ebg63h+dlPZ/in7/d/f2S66/D88P1Ei2XZKvKdVRerbRT6N1bpvMRlnh3B3BhC/y8ZqPChx/H77fXr/uxHPTdOf+Hx9PCOR6nP3B6JF1KuP1Z5C/uRezc/uryTw80lr277Jcogsvtc8B88rEfJDUiPziSTz62Z5d6jc/L3/rb0+H0689rdXUv52gbxX24u9ouHoMr/sfj0/PNt8N5YVC9qhsp01Hk91RPOMd8KTBojkVSG6ursF5rHN3Y2StKgb6iZOLuE+jdp/F/PO1ODKyUVfLCk1d38dN+BnOiMGcFc+YwZwZzFjBnDnPegDlLrcpOrNyN5MahykKpylAqj3JxQrUqXOAqXGAuUeQfMjWhXJxSOWX2OrWuW/VrKs1dva9OYa4c5qpgrhzmymGuFOaqYK4c5lp58kaTe6Ua4eaFymdpQ6jcbrDULYpzt0TP3YZErT9CtU41r1PuRprQqNb5dXcOc9cwdwpzFzB3AXOnMPcNmPsGzH3Ila/t9GrqNAJ/dxYmxfKf7YGJlgWhWha4bFnIskChBaoq0EQBr1kuvnRXTOjNGNhmlGwzhbYZZ9tMwm2m6TYTeJsJvs2obhmccHnADV661uXh5evCuGHdU7+GnXxNkBt4N23wCvZT8SpfmWi7TPVdNjVe04IpICJFPSrUo0A9StQjRT0q1KNAPQrU01C0ufn3g4TbDp4+RXX+RMeI5ARtfW1pQ9YseV3zV5SoqFkSqjb1YRPqUyO2Lr+0Y28gDNQzRz1L1LNAPW+hnjXqWaCeFepFoV6cwk0DHte4IjWuCI0rWRQovECVBZooMLTND6JO2qY0c1fmHuBNmS1dGdWCSlGvG6jXLdSrQr1y1KtAvUnU2xbqbSjbAL1FUcPr2ox689LmUG9y8rCmfRJrYv6wpqySvvZKXsPKKulC47rUuKVtuyDhnhCod456l6h3gXpnqCMI1BE46ggcdQQ+gCDQCQTBi9raGAkbyobAbZMgfJMgVA2mnBOYtE5gzDuBCfMEJt0TLO3bGwcDdZhEHaZRhwnUYQJ1gKIOCNQBjjqgUAeYxgHCFgSKKKB8QYB5KQB3BqO0BqPwBmm/BtWvQfRriFv+YNwyCCNHPQrUo0I9SdSTRj1R1JNCPWnUE3MKkfSQgrThFSKJQQWJDirI3GFBVhYLstC4LDQuc43LymZB5j4LsnINkSnqmaNeJOpFoF4o6kWhXgTqZdMK18pWuH+IolStKFWr3HVB1bYLKvVdUIXxgiqcF1RqvWCrc0PdMF9QhZWIylFvAvUmUW8C9SZQbxz1JlFvAvXGPUU0aiqicVcRXdmK6Mx+QaejCboaTdD5aIIu7Rf0DWXrwn5BV6rWhb8YA0c9Bo36/37my38=\", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [CarKey = _t, Color = _t, Brand = _t]),",
+          "    #\"Tipo cambiado\" = Table.TransformColumnTypes(Origen,{{\"CarKey\", Int64.Type}, {\"Color\", type text}, {\"Brand\", type text}}),",
+          "    #\"Texto recortado\" = Table.TransformColumns(#\"Tipo cambiado\",{{\"Brand\", Text.Trim, type text}}),",
+          "    #\"Valor reemplazado\" = Table.ReplaceValue(#\"Texto recortado\",\"$\",\"\",Replacer.ReplaceText,{\"Color\"})",
+          "in",
+          "    #\"Valor reemplazado\""
+        ]
+      }
+    ],
+    "annotations": [
+      {
+        "name": "ClientCompatibilityLevel",
+        "value": "700"
+      }
+    ]
+  },
+  "id": "SemanticModel"
+}
